@@ -11,10 +11,12 @@ public class FlipperScript : MonoBehaviour {
     {
         if(collision.collider.CompareTag("Player") && transform.parent.GetComponent<FlipperControl>().playing)
         {
+            int[] loc=new int[2] { (int)(transform.localPosition.x + 2.66f) / 3, 
+                (int)(transform.localPosition.z + 4.19f) / 3 };
             if(!flipped)
-                transform.parent.GetComponent<FlipperControl>().HandleFlip(Flips, new int[2] { (int)transform.localPosition.x/2, (int)transform.localPosition.z/2 });
+                transform.parent.GetComponent<FlipperControl>().HandleFlip(Flips, loc);
             else
-                transform.parent.GetComponent<FlipperControl>().HandleFlip(FlippedFlips, new int[2] { (int)transform.localPosition.x/2, (int)transform.localPosition.z/2 });
+                transform.parent.GetComponent<FlipperControl>().HandleFlip(FlippedFlips,loc);
         }
     }
 

@@ -8,6 +8,7 @@ public class dynaController : MonoBehaviour {
     public int CheckedVal;
     public Vector3 LastBlockPos;
     public bool Playing;
+    public int ShuffleID;
 
 	// Use this for initialization
 	void Start () {
@@ -47,7 +48,7 @@ public class dynaController : MonoBehaviour {
                 transform.GetChild(i).GetComponent<dynaHelper>().flip();
             }
         }
-        int s = GameControl.singleton.RNG.Next(4);
+        int s = ShuffleID;
         if (s == 0)
             Shuffle(s, new Vector3(-3, 0f, LastBlockPos.z));
         else if (s == 1)
@@ -76,6 +77,18 @@ public class dynaController : MonoBehaviour {
         t.Speed = 2;
     }
 
+    public void SetCubePosition(Vector3 StartPos, Vector3 EndPos)
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            if (Vector3.SqrMagnitude(transform.GetChild(i).localPosition - StartPos) < .1f)
+            {
+                transform.GetChild(i).localPosition=EndPos;
+                break;
+            }
+        }
+    }
+
     public void Shuffle(int ShuffleType, Vector3 StartPos)
     {
         switch(ShuffleType)
@@ -83,22 +96,26 @@ public class dynaController : MonoBehaviour {
             case 0:
                 MoveCube(StartPos, Vector3.right);
                 MoveCube(StartPos+Vector3.right*3, Vector3.right);
-                MoveCube(StartPos + Vector3.right*6, Vector3.left*2);
+                SetCubePosition(StartPos + Vector3.right * 6, StartPos + Vector3.left * 3);
+                MoveCube(StartPos + Vector3.left * 3, Vector3.right);
                 break;
             case 1:
                 MoveCube(StartPos, Vector3.left);
                 MoveCube(StartPos + Vector3.left * 3, Vector3.left);
-                MoveCube(StartPos + Vector3.left * 6, Vector3.right * 2);
+                SetCubePosition(StartPos + Vector3.left * 6, StartPos + Vector3.right * 3);
+                MoveCube(StartPos + Vector3.right * 3, Vector3.left); 
                 break;
             case 2:
                 MoveCube(StartPos, Vector3.back);
                 MoveCube(StartPos + Vector3.back * 3, Vector3.back);
-                MoveCube(StartPos + Vector3.back * 6, Vector3.forward * 2);
+                SetCubePosition(StartPos + Vector3.back * 6, StartPos + Vector3.forward * 3);
+                MoveCube(StartPos + Vector3.forward * 3, Vector3.back);
                 break;
             case 3:
                 MoveCube(StartPos, Vector3.forward);
                 MoveCube(StartPos + Vector3.forward * 3, Vector3.forward);
-                MoveCube(StartPos + Vector3.forward * 6, Vector3.back * 2);
+                SetCubePosition(StartPos + Vector3.forward * 6, StartPos + Vector3.back * 3);
+                MoveCube(StartPos + Vector3.back * 3, Vector3.forward);   
                 break;
         }
     }

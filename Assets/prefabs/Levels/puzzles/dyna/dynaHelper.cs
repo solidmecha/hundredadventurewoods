@@ -4,6 +4,7 @@ using System.Collections;
 public class dynaHelper : MonoBehaviour {
 
     public bool Flipped;
+    public int ShuffleType;
 
     private void OnCollisionEnter(Collision other)
     {
@@ -15,6 +16,7 @@ public class dynaHelper : MonoBehaviour {
             d.LastBlockPos = transform.localPosition;
             d.Invoke("CheckNum", .3f);
             d.Playing = false;
+            d.ShuffleID = ShuffleType;
         }
     }
 
@@ -28,7 +30,7 @@ public class dynaHelper : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	
+        ShuffleType = GameControl.singleton.RNG.Next(4);
 	}
 	
 	// Update is called once per frame
