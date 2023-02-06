@@ -44,7 +44,7 @@ public class DicerControl : MonoBehaviour {
         }
         for (int i = 0; i < 6; i++)
         {
-            T[i].position = V[i];
+            T[i].localPosition = V[i];
         }
         ScoreBlocks();
     }
@@ -63,7 +63,7 @@ public class DicerControl : MonoBehaviour {
         }
         for (int i = 0; i < 6; i++)
         {
-            T[i].position = V[i];
+            T[i].localPosition = V[i];
         }
         ScoreBlocks();
     }
@@ -140,10 +140,9 @@ public class DicerControl : MonoBehaviour {
 
     public Transform GetBlockAtPosition(Vector3 pos)
     {
-        pos += transform.position;
         for(int i=0;i<36;i++)
         {
-            if((transform.GetChild(i).position-pos).sqrMagnitude<.1f)
+            if((transform.GetChild(i).localPosition-pos).sqrMagnitude<.1f)
                 return transform.GetChild(i);
         }
         return null;
@@ -162,7 +161,7 @@ public class DicerControl : MonoBehaviour {
         }
         for (int i = 0; i < 6; i++)
         {
-            T[i].position = V[i];
+            T[i].localPosition = V[i];
         }
         ScoreBlocks();
     }
@@ -180,7 +179,7 @@ public class DicerControl : MonoBehaviour {
         }
         for (int i = 0; i < 6; i++)
         {
-            T[i].position = V[i];
+            T[i].localPosition = V[i];
         }
         ScoreBlocks();
     }

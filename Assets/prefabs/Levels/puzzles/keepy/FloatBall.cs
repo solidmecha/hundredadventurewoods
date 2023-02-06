@@ -24,7 +24,7 @@ public class FloatBall : MonoBehaviour {
             , ForceMode.Impulse);
        GameObject g= Instantiate(Goal, WorldBuilder.singleton.CurrentFloor.transform) as GameObject;
         g.transform.localPosition = Vector3.zero;
-        g.transform.GetChild(0).localPosition = new Vector3(GameControl.singleton.RNG.Next(-12, 13), 0, GameControl.singleton.RNG.Next(-12, 13));
+        g.transform.GetChild(0).localPosition = new Vector3(GameControl.singleton.RNG.Next(-8, 9), 0, GameControl.singleton.RNG.Next(-8, 9));
     }
 	
 	// Update is called once per frame
